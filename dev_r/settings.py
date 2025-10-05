@@ -2,7 +2,6 @@
 Django settings for dev_r project.
 Configured for Render + PostgreSQL
 """
-
 from pathlib import Path
 import os
 import dj_database_url
@@ -35,6 +34,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # important for static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,6 +74,10 @@ DATABASE_URL = os.getenv(
 DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
 }
+
+
+
+
 
 # -------------------------------
 # PASSWORD VALIDATION
