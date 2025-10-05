@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'dev_r.wsgi.application'
 # -------------------------------
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://devr_db_user:kbS5Ru7rMKp4jgHC2nSyQ7VXPt47aEPT@dpg-d3h2sepr0fns73c1na10-a/devr_db"
+    "postgres://devr_db_user:kbS5Ru7rMKp4jgHC2nSyQ7VXPt47aEPT@dpg-d3h2sepr0fns73c1na10-a/devr_db"
 )
 
 DATABASES = {
