@@ -8,7 +8,7 @@ import os
 import dj_database_url
 from dotenv import load_dotenv
 
-# Load environment variables (optional if using .env)
+# Load environment variables
 load_dotenv()
 
 # Base directory
@@ -16,13 +16,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret-key')
-
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-# Render app domain allow
+# Render domain allow
 ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
-# APPS
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,12 +29,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'resources',
+    'resources',  # your custom app
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # important for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -49,7 +48,7 @@ ROOT_URLCONF = 'dev_r.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [BASE_DIR / "templates"],  # optional templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,7 +68,7 @@ WSGI_APPLICATION = 'dev_r.wsgi.application'
 # -------------------------------
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgres://devr_db_user:kbS5Ru7rMKp4jgHC2nSyQ7VXPt47aEPT@dpg-d3h2sepr0fns73c1na10-a/devr_db"
+    "postgresql://devr_db_user:kbS5Ru7rMKp4jgHC2nSyQ7VXPt47aEPT@dpg-d3h2sepr0fns73c1na10-a/devr_db"
 )
 
 DATABASES = {
