@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Dev Resources{% endblock %}
+
+{% block content %}
+
+<!-- Search Bar -->
+<div class="row justify-content-center search-bar mb-4">
+    <div class="col-md-8">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search tools or libraries...">
+    </div>
+</div>
+
+<!-- Tools Section -->
+<h2 class="mb-4">🛠 Tools</h2>
+<div class="row" id="toolsContainer">
+    {% for tool in tools %}
+    <div class="col-md-4 mb-4 resource-card">
+        <div class="card h-100">
+            {% if tool.image %}
+            <img src="{{ tool.image.url }}" class="card-img-top" alt="{{ tool.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ tool.name }}</h5>
+                <p class="card-text">{{ tool.description }}</p>
+                <a href="{{ tool.link }}" class="btn btn-primary" target="_blank">Visit Tool</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Libraries Section -->
+<h2 class="mb-4 mt-5">📚 Libraries</h2>
+<div class="row" id="librariesContainer">
+    {% for library in libraries %}
+    <div class="col-md-4 mb-4 resource-card">
+        <div class="card h-100">
+            {% if library.image %}
+            <img src="{{ library.image.url }}" class="card-img-top" alt="{{ library.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ library.name }}</h5>
+                <p class="card-text">{{ library.description }}</p>
+                <a href="{{ library.link }}" class="btn btn-success" target="_blank">Visit Library</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const resourceCards = document.querySelectorAll('.resource-card');
+
+    searchInput.addEventListener('input', function () {
+        const query = this.value.toLowerCase();
+        resourceCards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+            card.style.display = text.includes(query) ? 'block' : 'none';
+        });
+    });
+</script>
+{% endblock %}

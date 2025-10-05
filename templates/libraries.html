@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<title>{% block title %}Dev Resources Libraries{% endblock %}</title>
+<div class="container my-5">
+    <h2 class="text-center fw-bold mb-4">React Libraries</h2>
+    <div class="row g-4">
+        {% for library in libraries %}
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 rounded-4 h-100 overflow-hidden"
+                style="transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <!-- Image -->
+                {% if library.image %}
+                <img src="{{ library.image.url }}" class="card-img-top" alt="{{ library.name }}"
+                    style="height: 200px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="No Image"
+                    style="height: 200px; object-fit: cover;">
+                {% endif %}
+
+                <!-- Card Body -->
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">{{ library.name }}</h5>
+                    <p class="card-text text-muted">
+                        {{ library.description|truncatechars:120|default:"No description available." }}
+                    </p>
+                    <div class="mt-auto">
+                        <a target="_blank" href="{{ library.link }}" class="btn btn-primary rounded-pill w-100">
+                            Explore
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">No libraries available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
+{% endblock %}
